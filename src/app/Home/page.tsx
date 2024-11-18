@@ -1,13 +1,17 @@
-import { Metadata } from 'next';
-import HomePage from './Home/page'
+import { Metadata } from "next";
+import { HomeComp } from "./Home";
 
 export const metadata: Metadata = {
   title: "Главная",
   description: "Здесь вы можете найти партнёров для вашего бизнеса",
 };
 
-export default function Home() {
-  return (
-    <HomePage />
-  );
+export default function HomePage() {
+
+
+	return (
+		<>
+			<HomeComp />
+		</>
+	)
 }
