@@ -28,26 +28,35 @@ export function Filters(props: IProps) {
 		<form className="filters flex-col xl:flex-row flex gap-4 xl:gap-10 justify-between items-center w-full mt-6">
 
 				<select className={`${style.select} bg-black text-white`}>
-					<option value="" selected>Тип деятеля:</option>
+					<option value="" selected>Тип бизнеса:</option>
 					<option value="investor">Инвестор</option>
 					<option value="buisness">Предприниматель</option>
 				</select>
 
 				<select className={`${style.select} bg-black text-white`}>
-					<option value="" selected>Тип деятеля:</option>
+					<option value="" selected>Оформление:</option>
+					<option value="investor">ООО</option>
+					<option value="buisness">ИП</option>
+				</select>
+
+				<select className={`${style.select} bg-black text-white`}>
+					<option value="" selected>Срок окупаемости:</option>
+					<option value="investor">3-6 месяцев</option>
+					<option value="buisness">6-12 месяцев</option>
+					<option value="buisness">12-18 месяцев</option>
+					<option value="buisness">18-24 месяцев</option>
+					<option value="buisness">более 24 месяцев</option>
+				</select>
+
+				<select className={`${style.select} bg-black text-white`}>
+					<option value="" selected>Стоимость</option>
 					<option value="investor">Инвестор</option>
 					<option value="buisness">Предприниматель</option>
 				</select>
 
 				<select className={`${style.select} bg-black text-white`}>
-					<option value="" selected>Сортировать по:</option>
-					<option value="investor">Инвестор</option>
-					<option value="buisness">Предприниматель</option>
-				</select>
-
-				<select className={`${style.select} bg-black text-white`}>
-					<option value="" selected>Сортировать по:</option>
-					<option value="investor">Инвестор</option>
+					<option value="" selected>Город</option>
+					<option value="investor">Инвестор</option> 
 					<option value="buisness">Предприниматель</option>
 				</select>
 			</form>

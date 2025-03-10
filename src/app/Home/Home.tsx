@@ -1,12 +1,13 @@
 'use client'
 
+import Link from 'next/link';
 import style from './Home.module.scss'
 import { Filters } from './Filters';
 import { Buisness, Investor } from '@/types/peoples.interface';
-import Link from 'next/link';
 import { useState } from 'react';
+import { useBuisnesses } from '@/hooks/useBuisness';
 
-const data = [
+const investors = [
 	{
 		id: `6682gcbc71-cmjn-18h`,
 		image: '/g82.jpg',
@@ -33,38 +34,13 @@ const data = [
 	},
 ]
 
-const buisnesses: Buisness[] = [
-	{
-		id: `6682gcbc71-cmjn-18h2`,
-		images: ['/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg'],
-		title: `Кофейня в центре Москвы`,
-		category: `Оффлайн точка`,
-		description: `Кофейня в центре Москвы, которая пупупупупупупупупупупупупупупупупупупупупупупупупупупупупупупупу`,
-		city: `Москва`,
-		form: `OOO`,
-		precent: [40, 60],
-		money: [5000000 ,10000000],
-		payback: 24,
-	},
-	{
-		id: `6682gcbc71-cmjn-18h2`,
-		images: ['/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg', '/g82.jpg'],
-		title: `Кофейня в центре Москвы`,
-		category: `Оффлайн точка`,
-		description: `Кофейня в центре Москвы, которая пупупупупупупупупупупупупупупупупупупупупупупупупупупупупупупупу`,
-		city: `Москва`,
-		form: `OOO`,
-		precent: [40, 60],
-		money: [5000000 ,10000000],
-		payback: 24,
-	}
-]
-
 export function HomeComp() {
 
 	const [filters, setFilters] = useState({
 		isInvestor: false
 	});
+
+	const { data, isLoading } = useBuisnesses();
 
 	return (
 		<>
@@ -73,9 +49,9 @@ export function HomeComp() {
 			<div className="flex justify-center text-2xl mt-4 font-semibold"><h2>Результатов: 52</h2></div>
 			{filters.isInvestor ? (
 				<div className={`${style.investorsContainer} flex justify-center items-center mt-6 gap-5`}>
-				{data ? (
+				{investors ? (
 					<>
-						{data.map((investor: Investor) => (
+						{investors.map((investor: Investor) => (
 							<Link href={`/investor/${investor.id}`} className={style.card} key={investor.id} >
 								<div className={style.imgBlock}>
 									<img src={investor.image} alt="Image" />
@@ -95,43 +71,49 @@ export function HomeComp() {
 			</div>
 			) : (
 				<>
-					{buisnesses ? (
-						<div className={`${style.buisnessContainer} flex flex-col my-6 gap-5`}>
-							{buisnesses.map((buisness: Buisness, index: number) => (
-							<Link href={`/buisness/${buisness.id}`} className={`${style.buisnessCard} flex flex-row gap-6 p-8 justify-between`} key={buisness.id} >
-								<div className="flex gap-6">
-									<div className={`${style.imageContainer}`}>
-										<img src={buisness.images[0]} />
-										<div className={style.imagesSmall}>
-												{buisness.images.map((image: string, index: number) => (
-													<>
-														{index <= 5 && (<img src={image} />)}
-													</>
-												))}
+				{!isLoading ? (
+					<>
+						{data ? (
+							<div className={`${style.buisnessContainer} flex flex-col my-6 gap-5`}>
+								{data.map((buisness: Buisness) => (
+								<Link href={`/Buisness/${buisness.id}`} className={`${style.buisnessCard} flex flex-row gap-6 p-8 justify-between`} key={buisness.id} >
+									<div className="flex gap-6">
+										<div className={`${style.imageContainer}`}>
+											<img src={buisness.images[0]} />
+											<div className={style.imagesSmall}>
+													{buisness.images.map((image: string, index: number) => (
+														<>
+															{index <= 5 && (<img src={image} />)}
+														</>
+													))}
+											</div>
+										</div>
+										<div className={`${style.infoContainer} flex flex-col gap-3`}>
+												<h2 className='font-semibold text-2xl'>{buisness.title}</h2>
+												<p className='text-slate-500'>{buisness.description.substring(0, 90)} {buisness.description.length > 90 && '...'}</p>
+												<span>Тип: <b>{buisness.category}</b></span>
+												<span>Город: <b>{buisness.city}</b></span>
+												<span>Оформление: <b>{buisness.form}</b></span>
+												<span>Доля: <b>{buisness.precent[0]}</b> на <b>{buisness.precent[1]}</b> в сторону <b>{buisness.precent[0] >= buisness.precent[1] ? 'предпринимателя' : 'инвестора'}</b></span>
+												<span>Приблизительный срок окупаемости: <b>{buisness.payback} месяца(-ев)</b></span>
 										</div>
 									</div>
-									<div className={`${style.infoContainer} flex flex-col gap-3`}>
-											<h2 className='font-semibold text-2xl'>{buisness.title}</h2>
-											<p className='text-slate-500'>{buisness.description.substring(0, 90)} {buisness.description.length > 90 && '...'}</p>
-											<span>Тип: <b>{buisness.category}</b></span>
-											<span>Город: <b>{buisness.city}</b></span>
-											<span>Оформление: <b>{buisness.form}</b></span>
-											<span>Доля: <b>{buisness.precent[0]}</b> на <b>{buisness.precent[1]}</b> в сторону <b>{buisness.precent[0] >= buisness.precent[1] ? 'предпринимателя' : 'инвестора'}</b></span>
-											<span>Приблизительный срок окупаемости: <b>{buisness.payback} месяца(-ев)</b></span>
-									</div>
-								</div>
 
-									<div className={`${style.priceContainer} flex flex-col justify-end items-end gap-3 text-3xl`}>
-											<h2><i>Оценка стоимости:</i></h2>
-											<span className='mr-10'>от <i className='text-4xl font-bold'>{buisness.money[0]} р.</i></span>
-											<span>до <i className='text-4xl font-bold'>{buisness.money[1]} р.</i></span>
-									</div>
-							</Link>
-							))}
-						</div>
-					) : (
-						<div className="flex justify-center text-2xl mt-4 font-semibold"><h2>Не удалось найти(</h2></div>
-					)}
+										<div className={`${style.priceContainer} flex flex-col justify-end items-end gap-3 text-3xl`}>
+												<h2><i>Оценка стоимости:</i></h2>
+												<span className='mr-10'>от <i className='text-4xl font-bold'>{buisness.money[0]} р.</i></span>
+												<span>до <i className='text-4xl font-bold'>{buisness.money[1]} р.</i></span>
+										</div>
+								</Link>
+								))}
+							</div>
+						) : (
+							<div className="flex justify-center text-2xl mt-4 font-semibold"><h2>Не удалось найти(</h2></div>
+						)}
+					</>
+				) : (
+					<h1 className='flex justify-center text-center my-10 text-5xl font-semibold'>Загрузка...</h1>
+				)}
 				</>
 			)}
 		</>
