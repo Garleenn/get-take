@@ -1,9 +1,14 @@
+'use client'
+
 import Link from 'next/link'
 import style from './Header.module.scss'
 import { MdMenu } from 'react-icons/md'
+import { GoArrowDown } from 'react-icons/go'
+import { useState } from 'react'
 
 export function Header() {
 
+	const [isOpen, setIsOpen] = useState(false)
 
 	return (
 		<>
@@ -15,7 +20,13 @@ export function Header() {
 				<nav className={style.nav}>
 					<ul className='flex items-center gap-10'>
 						<li><Link className='a-hover' href={'/'}>Главная</Link></li>
-						<li><Link className='a-hover' href={'#'}>Найти</Link></li>
+						<li><Link onClick={() => setIsOpen(!isOpen)} className='a-hover flex gap-2 items-center' href={'#'}>Найти <GoArrowDown /></Link></li>
+						{isOpen && (
+							<div className={`${style.menu} flex gap-12 text-2xl font-semibold p-6 border-2 border-blue rounded-xl`}>
+								<u className={style.underline}><Link onClick={() => setIsOpen(!isOpen)} href={'/Businesses'}>Бизнес</Link></u>
+								<u className={style.underline}><Link onClick={() => setIsOpen(!isOpen)} href={'/Investores'}>Инвестора</Link></u>
+							</div>
+						)}
 						<li><Link className='a-hover' href={'/login'}>Войти</Link></li>
 					</ul>
 				</nav>

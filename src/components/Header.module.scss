@@ -3,10 +3,11 @@ $main: #364ee9;
 .header {
 	padding: 10px 0;
 	background-color: $main;
+	z-index: 10;
 }
 
 .logoContainer {
-	display: flex; 
+	display: flex;
 	align-items: center;
 	gap: 10px;
 
@@ -31,15 +32,41 @@ $main: #364ee9;
 }
 
 @media (max-width: 1068px) {
-	.logoContainer {	
+	.logoContainer {
 		h2 {
 			display: none !important;
 		}
 	}
+
 	.nav {
 		display: none !important;
 	}
+
 	.burgerMenu {
 		display: flex;
 	}
+}
+
+.menu {
+	position: absolute;
+	top: 80%;
+	right: 3%;
+	background: #fff;
+	color: #364ee9;
+}
+
+.underline {
+	color: #364ee9;
+	text-decoration: none;
+	background-image: linear-gradient(#364ee9, #364ee9);
+	background-size: 0% 0.1em;
+	background-position-y: 100%;
+	background-position-x: 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.2s ease-in-out;
+}
+
+.underline:hover, .underline:focus, .underline:active {
+	background-size: 100% 0.1em;
+	background-position-x: 0%;
 }

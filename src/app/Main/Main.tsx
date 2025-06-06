@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import style from './Main.module.scss'
 
 const reviews = [
@@ -28,7 +29,7 @@ export function MainComp() {
 					<span>На</span>
 					<h2 className='mb-12'>Buisness Hub!</h2>
 
-					<button type="button" className='px-20 py-6 text-3xl border-white border-2 rounded-xl'>Войти</button>
+					<Link href='/login'><button type="button" className='px-20 py-6 text-3xl border-white border-2 rounded-xl'>Войти</button></Link>
 				</div>
 
 				<div className={`${style.rightBlock} flex flex-col items-center justify-center gap-8 p-12 text-3xl font-bold`}>
@@ -36,7 +37,7 @@ export function MainComp() {
 					<span>Предпринимателям и профессиональным </span>
 					<h2 className='mb-12'>Инвесторам найти друг друга! </h2>
 
-					<button type="button" className='px-20 py-6 text-3xl border-blue border-2 rounded-xl'>Регистрация</button>
+					<Link href='/register'><button type="button" className='px-20 py-6 text-3xl border-blue border-2 rounded-xl'>Регистрация</button></Link>
 				</div>
 			</div>
 

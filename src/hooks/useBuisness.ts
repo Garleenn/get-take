@@ -1,15 +1,15 @@
 import Buisnesses from "@/services/buisness.service";
-// import { Buisness } from "@/types/peoples.interface";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-// import { AxiosResponse } from "axios";
 
 
 export const useBuisnesses = () => {
-	return useQuery({
+	const {data, isLoading} = useQuery({
 		queryKey: ['getBuisnesses'],
 		queryFn: () => Buisnesses.getBuisnesses(),
 		select: (data) => data.data
 	});
+
+	return {data, isLoading}
 }
 
 export const useBuisness = (id: string) => {

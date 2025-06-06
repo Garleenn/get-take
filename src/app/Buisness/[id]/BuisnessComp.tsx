@@ -35,7 +35,7 @@ export function BuisnessComp() {
 							)}
 							<div className={`${style.infoBlock} flex flex-col gap-3`}>
 								<h1 className='text-4xl font-bold'>{data.title}</h1>
-								<p className='text-slate-500'>Описание: {data.description}</p>
+								<p className='text-slate-500'>{data.description}</p>
 								<span>Категория: <b>{data.category}</b></span>
 								<span>Город: <b>{data.city}</b></span>
 								<span>Оформление: <b>{data.form}</b></span>
